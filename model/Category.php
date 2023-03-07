@@ -70,28 +70,26 @@ class Category {
      // Create Query
      $query = 'INSERT INTO ' .
        $this->table . '
-     SET
-       category = :category';
+     (category) VALUES (?)
+     RETURNING *';
  
-   // Prepare Statement
-   $stmt = $this->conn->prepare($query);
+    // Prepare Statement
+    $stmt = $this->conn->prepare($query);
+  
+    // Clean data
+    $this->category = htmlspecialchars(strip_tags($this->category));
+  
+    // Bind data
+    $stmt-> bindParam(1, $this->category);
+  
+     // Execute query
+     $stmt->execute();
  
-   // Clean data
-   $this->category = htmlspecialchars(strip_tags($this->category));
- 
-   // Bind data
-   $stmt-> bindParam(':category', $this->category);
- 
-   // Execute query
-   if($stmt->execute()) {
-     return true;
-   }
- 
-   // Print error if something goes wrong
-   printf("Error: $s.\n", $stmt->error);
- 
-   return false;
-   }
+     $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     if($row){
+      print_r(json_encode($row));
+     }
+  }
  
    // Update Category
    public function update() {

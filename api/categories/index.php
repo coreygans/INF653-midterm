@@ -1,9 +1,4 @@
 <?php
-// Headers
-  header('Access-Control-Allow-Origin: *');
-  header('Content-Type: application/json');
-  header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
-  header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization,X-Requested-With');
 
   include_once '../../config/Database.php';
   include_once '../../model/Category.php';
@@ -15,51 +10,24 @@ $db = $database->connect();
 // Instantiate category object
 $category = new Category($db);
 
-$id = htmlspecialchars($_GET['id']);
+$method = $_SERVER['REQUEST_METHOD'];
 
-
-if(($_SERVER['REQUEST_METHOD'] === 'GET') & (empty($id))){ 
-  // Category read query
-  $result = $category->read();
-
-    // Cat array
-    $cat_arr = array();
-    $cat_arr['data'] = array();
-
-    while($row = $result->fetch(PDO::FETCH_ASSOC)) {
-      extract($row);
-
-      $cat_item = array(
-        'id' => $id,
-        'category' => $category
-      );
-
-      // Push to "data"
-      array_push($cat_arr['data'], $cat_item);
-    }
-
-    // Turn to JSON & output
-    echo json_encode($cat_arr);
-  }
-elseif(($_SERVER['REQUEST_METHOD'] === 'GET') & ($id != null)){
-
-  // Get ID
-  $category->id = $id;
-
-   // Get category
-  $category->read_single();
-
+if($method === 'POST') {
+  include_once 'post.php';
 }
 
 
-if(($_SERVER['REQUEST_METHOD'] === 'POST') & ($category != null)) {
- 
+if($method === 'GET') {
+  include_once 'get.php';
 }
-elseif(($_SERVER['REQUEST_METHOD'] === 'POST') & ($category = null)) {
-  //I don't think we need this error message (confirming in Discord)
-  echo json_encode(
-    array('message' => 'category_id Not Found')
-  );
+
+
+
+
+if ($method === 'OPTIONS') {
+  header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+  header('Access-Control-Allow-Headers: Origin, Accept, Content-Type, X-Requested-With');
+  exit();
 }
 
 
