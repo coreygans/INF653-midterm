@@ -15,24 +15,24 @@ class Category {
      }
  
      // Get categories
-   public function read() {
-       // Create query
-       $query = 'SELECT
-         id,
-         category
-         FROM
-         ' . $this->table . '
-       ORDER BY
-         id';
- 
-       // Prepare statement
-       $stmt = $this->conn->prepare($query);
- 
-       // Execute query
-       $stmt->execute();
- 
-       return $stmt;
-     }
+     public function read() {
+      // Create query
+      $query = 'SELECT
+        id,
+        category
+        FROM
+        ' . $this->table . '
+      ORDER BY
+        id';
+
+      // Prepare statement
+      $stmt = $this->conn->prepare($query);
+
+      // Execute query
+      $stmt->execute();
+
+      return $stmt;
+    }
  
      // Get Single Category
    public function read_single(){
@@ -83,12 +83,12 @@ class Category {
     $stmt-> bindParam(1, $this->category);
   
      // Execute query
-     $stmt->execute();
+       $stmt->execute();
  
-     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-     if($row){
-      print_r(json_encode($row));
-     }
+       $row = $stmt->fetch(PDO::FETCH_ASSOC);
+       if($row){
+        print_r(json_encode($row));
+       }
   }
  
    // Update Category

@@ -4,9 +4,8 @@ if(empty($_GET['id'])){
   // Category read query
   $result = $category->read();
 
-    // Cat array
+    //Cat array
     $cat_arr = array();
-    $cat_arr['data'] = array();
 
     while($row = $result->fetch(PDO::FETCH_ASSOC)) {
       extract($row);
@@ -17,10 +16,10 @@ if(empty($_GET['id'])){
       );
 
       // Push to "data"
-      array_push($cat_arr['data'], $cat_item);
+      array_push($cat_arr, $cat_item);
     }
 
-    // Turn to JSON & output
+    //Turn to JSON & output
     echo json_encode($cat_arr);
   }
 elseif($_GET['id'] != null){
