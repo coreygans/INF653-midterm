@@ -1,14 +1,6 @@
 <?php
 
-$id = htmlspecialchars($_GET['id']);
-
-if(empty($id)){ 
-  // Headers
-  header('Access-Control-Allow-Origin: *');
-  header('Content-Type: application/json');
-  header('Access-Control-Allow-Methods: GET');
-  header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization,X-Requested-With');
-  echo $name;
+if(empty($_GET['id'])){ 
   // Category read query
   $result = $category->read();
 
@@ -31,13 +23,13 @@ if(empty($id)){
     // Turn to JSON & output
     echo json_encode($cat_arr);
   }
-elseif(($_SERVER['REQUEST_METHOD'] === 'GET') & ($id != null)){
+elseif($_GET['id'] != null){
 // Headers
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: GET');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization,X-Requested-With');
-
+$id = htmlspecialchars($_GET['id']);
   // Get ID
   $category->id = $id;
 
