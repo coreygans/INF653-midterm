@@ -1,5 +1,12 @@
 <?php
-$name = $_POST('name');
+
+$json = file_get_contents('php://input');
+
+// Converts it into a PHP object
+$data = json_decode($json, true);
+
+ $name = htmlspecialchars($data['name']);
+
 
 if(isset($name)) {
   // Headers
@@ -7,11 +14,7 @@ if(isset($name)) {
   header('Content-Type: application/json');
   header('Access-Control-Allow-Methods: POST');
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization,X-Requested-With');
-  
-  $name = htmlspecialchars($_POST['name']);
-
-  // Get raw posted data
-  //$data = json_decode(file_get_contents("php://input"));
+   
 
   $category->name = $name;  
 

@@ -80,7 +80,7 @@ class Category {
     $this->category = htmlspecialchars(strip_tags($this->category));
   
     // Bind data
-    $stmt-> bindParam(1, $this->category);
+    $stmt-> bindParam(1, $this->name);
   
      // Execute query
        $stmt->execute();
