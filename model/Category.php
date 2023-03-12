@@ -77,13 +77,13 @@ class Category {
     $stmt = $this->conn->prepare($query);
   
     // Clean data
-    $this->category = htmlspecialchars(strip_tags($this->category));
+    $this->name = htmlspecialchars(strip_tags($this->name));
   
     // Bind data
     $stmt-> bindParam(1, $this->name);
   
      // Execute query
-       $stmt->execute();
+    $stmt->execute();
  
        $row = $stmt->fetch(PDO::FETCH_ASSOC);
        if($row){
@@ -97,30 +97,37 @@ class Category {
      $query = 'UPDATE ' .
        $this->table . '
      SET
-     category = :category
+     category = ?
        WHERE
-       id = :id';
+       id = ?
+       RETURNING *';
  
    // Prepare Statement
    $stmt = $this->conn->prepare($query);
  
    // Clean data
-   $this->category = htmlspecialchars(strip_tags($this->category));
+   $this->name = htmlspecialchars(strip_tags($this->name));
    $this->id = htmlspecialchars(strip_tags($this->id));
  
    // Bind data
-   $stmt-> bindParam(':category', $this->category);
-   $stmt-> bindParam(':id', $this->id);
+   $stmt-> bindParam(1, $this->name);
+   $stmt-> bindParam(2, $this->id);
  
    // Execute query
    if($stmt->execute()) {
-     return true;
-   }
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+      if($row){
+      print_r(json_encode($row));
+      }
+    }
+    
+    else{
  
    // Print error if something goes wrong
    printf("Error: $s.\n", $stmt->error);
  
-   return false;
+   return false; }
+
    }
  
    // Delete Category

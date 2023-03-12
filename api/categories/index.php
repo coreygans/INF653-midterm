@@ -16,11 +16,12 @@ if($method === 'POST') {
   include_once 'post.php';
 }
 
-
 if($method === 'GET') {
   include_once 'get.php';
 }
-
+if(($_SERVER['REQUEST_METHOD'] === 'PUT')) {
+  include_once 'update.php';
+ }
 
 
 
@@ -29,12 +30,6 @@ if ($method === 'OPTIONS') {
   header('Access-Control-Allow-Headers: Origin, Accept, Content-Type, X-Requested-With');
   exit();
 }
-
-
-if(($_SERVER['REQUEST_METHOD'] === 'PUT') & ($id != null) ) {
-  // Need to handle the error message in the Model as I can check the row count there
-  
- }
 
 
 if(($_SERVER['REQUEST_METHOD'] === 'DELETE') & ($id != null) ) {
