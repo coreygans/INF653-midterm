@@ -32,7 +32,6 @@ if ($method === 'OPTIONS') {
 }
 
 
-if(($_SERVER['REQUEST_METHOD'] === 'DELETE') & ($id != null) ) {
- // Need to handle the error message in the Model as I can check the row count there
- 
+if(($_SERVER['REQUEST_METHOD'] === 'DELETE')) {
+ include_once 'delete.php';
 }
