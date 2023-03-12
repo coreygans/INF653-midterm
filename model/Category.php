@@ -116,8 +116,13 @@ class Category {
    // Execute query
    if($stmt->execute()) {
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-      if($row){
+      if($row > 0){
       print_r(json_encode($row));
+      }
+      else {
+        echo json_encode(
+          array('message' => 'category_id Not Found')
+        );
       }
     }
     
@@ -146,9 +151,20 @@ class Category {
  
      // Execute query
      if($stmt->execute()) {
-      echo json_encode(
-        array('message' => $this->id)
-      );
+      $row = $stmt->fetch(PDO::FETCH_ASSOC);
+      if($row > 0){
+        echo json_encode(
+          array('message' => $this->id)
+        );
+      }
+      else {
+        echo json_encode(
+          array('message' => 'category_id Not Found')
+        );
+      }
+
+
+
      }
      else{
      // Print error if something goes wrong
