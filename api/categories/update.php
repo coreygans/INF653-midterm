@@ -6,7 +6,7 @@ $json = file_get_contents('php://input');
 $data = json_decode($json, true);
 
 $id = $data['id'];
-$name = $data['name'];
+$name = $data['category'];
 
 
 if(empty($name) & empty($id)) {

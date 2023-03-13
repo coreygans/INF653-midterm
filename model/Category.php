@@ -87,7 +87,7 @@ class Category {
  
        $row = $stmt->fetch(PDO::FETCH_ASSOC);
        if($row){
-        print_r(json_encode($row));
+        print_r(json_encode($row,JSON_FORCE_OBJECT));
        }
   }
  
@@ -128,8 +128,8 @@ class Category {
     
     else{
  
-   // Print error if something goes wrong
-   printf("Error: $s.\n", $stmt->error);
+    // Print error if something goes wrong
+    printf("Error: $s.\n", $stmt->error);
  
    return false; }
 
