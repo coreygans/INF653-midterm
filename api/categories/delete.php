@@ -9,7 +9,10 @@ $id = $data['id'];
 
 
 if(empty($id)) {
-  //I don't think we need this error message (confirming in Discord)
+  header('Access-Control-Allow-Origin: *');
+  header('Content-Type: application/json');
+  header('Access-Control-Allow-Methods: DELETE');
+  header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization,X-Requested-With');
   echo json_encode(
     array('message' => 'Missing Required Parameters')
   );
@@ -31,6 +34,11 @@ elseif(!empty($id)) {
 }
 
 else{
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+header('Access-Control-Allow-Methods: DELETE');
+header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization,X-Requested-With');
+  
 echo json_encode(
     array('message' => 'Missing Required Parameters')
   );
