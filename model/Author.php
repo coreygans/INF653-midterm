@@ -14,7 +14,7 @@ class Author {
        $this->conn = $db;
      }
  
-     // Get categories
+     // Get authors
      public function read() {
       // Create query
       $query = 'SELECT

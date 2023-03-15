@@ -31,7 +31,6 @@ if(($_SERVER['REQUEST_METHOD'] === 'PUT')) {
   include_once 'update.php';
  }
 
-
 if(($_SERVER['REQUEST_METHOD'] === 'DELETE')) {
  include_once 'delete.php';
 }
