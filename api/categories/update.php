@@ -9,7 +9,7 @@ $id = $data['id'];
 $name = $data['category'];
 
 
-if(empty($name) & empty($id)) {
+if(empty($name) || empty($id) || !is_int($id)) {
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
     header('Access-Control-Allow-Methods: PUT');
