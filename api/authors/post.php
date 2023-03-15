@@ -7,7 +7,7 @@ $data = json_decode($json, true);
 
 
 
-$name = $data['category'];
+$name = $data['author'];
 
 if(empty($name)) {
   header('Access-Control-Allow-Origin: *');
@@ -28,10 +28,10 @@ elseif(!empty($name)) {
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization,X-Requested-With');
    
 
-  $category->name = $name;  
+  $author->name = $name;  
 
-    // Create category
-  $category->create();
+    // Create author
+  $author->create();
  
 }
 else {
