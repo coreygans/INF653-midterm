@@ -15,7 +15,7 @@ include_once '../../model/Author.php';
 $database = new Database();
 $db = $database->connect();
 
-// Instantiate category object
+// Instantiate author object
 $author = new Author($db);
 
 
