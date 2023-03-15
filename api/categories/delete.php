@@ -8,7 +8,7 @@ $data = json_decode($json, true);
 $id = $data['id'];
 
 
-if(empty($id)) {
+if(empty($id) || !is_int($id)) {
   header('Access-Control-Allow-Origin: *');
   header('Content-Type: application/json');
   header('Access-Control-Allow-Methods: DELETE');
@@ -18,7 +18,7 @@ if(empty($id)) {
   );
 }
 
-elseif(!empty($id)) {
+elseif(!empty($id) & is_int($id)) {
   // Headers
   header('Access-Control-Allow-Origin: *');
   header('Content-Type: application/json');

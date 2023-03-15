@@ -154,7 +154,7 @@ class Category {
       $row = $stmt->fetch(PDO::FETCH_ASSOC);
       if($row > 0){
         echo json_encode(
-          array('message' => $this->id)
+          array('id' => $this->id)
         );
       }
       else {
