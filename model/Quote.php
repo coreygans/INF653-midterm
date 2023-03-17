@@ -133,7 +133,7 @@ class Quote {
      }
      else {
        echo json_encode(
-         array('message' => 'quote_id Not Found')
+         array('message' => 'No Quotes Found')
        );
      }
    }
@@ -146,6 +146,43 @@ class Quote {
   return false; }
 
   }
+   // Delete quote
+   public function delete() {
+    // Create query
+    $query = 'DELETE FROM ' . $this->table . ' WHERE id = ?';
 
+    // Prepare Statement
+    $stmt = $this->conn->prepare($query);
+
+    // clean data
+    $this->id = htmlspecialchars(strip_tags($this->id));
+
+    // Bind Data
+    $stmt-> bindParam(1, $this->id);
+
+    // Execute query
+    if($stmt->execute()) {
+     $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     if($row > 0){
+       echo json_encode(
+         array('id' => $this->id)
+       );
+     }
+     else {
+       echo json_encode(
+         array('message' => 'No Quotes Found')
+       );
+     }
+
+
+
+    }
+    else{
+    // Print error if something goes wrong
+    printf("Error: $s.\n", $stmt->error);
+
+    return false;
+    }
+  }
 
 }
