@@ -36,8 +36,9 @@ elseif(!empty($quotation) && !empty($author) && !empty($category)) {
   $quote->author = $author;  
   $quote->category = $category;  
 
+
     // Create author
-  $author->create();
+  $quote->create();
  
 }
 else {

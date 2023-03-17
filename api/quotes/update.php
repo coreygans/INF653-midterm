@@ -6,13 +6,18 @@ $json = file_get_contents('php://input');
 $data = json_decode($json, true);
 
 $id = null;
-$name = null;
+$quotation = null;
+$author = null;
+$category = null;
 
 $id = $data['id'];
-$name = $data['author'];
+$quotation = $data['quote'];
+$author = $data['author'];
+$category = $data['category'];
 
 
-if(empty($name) || empty($id) || !is_int($id)) {
+
+if(empty($id) || !is_int($id) || empty($quotation) || empty($author) || !is_int($author) || empty($category) || !is_int($category)) {
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
     header('Access-Control-Allow-Methods: PUT');
@@ -22,19 +27,20 @@ echo json_encode(
   );
 }
 
-elseif(!empty($name) & !empty($id)) {
+elseif(!empty($id) || is_int($id) || !empty($quotation) || !empty($author) || is_int($author) || !empty($category) || is_int($category)) {
   // Headers
   header('Access-Control-Allow-Origin: *');
   header('Content-Type: application/json');
   header('Access-Control-Allow-Methods: PUT');
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization,X-Requested-With');
    
-
-  $author->name = $name;  
-  $author->id = $id;
-
+  $quote->id = $id;
+  $quote->quotation = $quotation;  
+  $quote->author = $author;  
+  $quote->category = $category;  
+  
     // Create author
-  $author->update();
+  $quote->update();
  
 }
 
