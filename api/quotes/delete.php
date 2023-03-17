@@ -26,10 +26,10 @@ elseif(!empty($id) & is_int($id)) {
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization,X-Requested-With');
    
 
-  $author->id = $id;
+  $quote->id = $id;
 
     // Create author
-  $author->delete();
+  $quote->delete();
  
 }
 
