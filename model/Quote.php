@@ -36,7 +36,7 @@ class Quote {
       return $stmt;
     }
  
-     // Get Single author
+     // Get Single quote
    public function read_single(){
      // Create query
     $query = '
@@ -66,6 +66,29 @@ class Quote {
         );
        }
    }
+
+     // Get all author's quotes
+     public function read_quotes_author(){
+      // Create query
+     $query = '
+      SELECT q.id, q.quote, a.author, c.category
+         FROM ' . $this->table . ' q
+         Inner join authors a ON q.author_id = a.id
+         inner join categories c ON q.category_id = c.id
+         WHERE q.author_id = ?';
+  
+        //Prepare statement
+        $stmt = $this->conn->prepare($query);
+  
+        // Bind ID
+        $stmt->bindParam(1, $this->author);
+                
+        // Execute query
+        $stmt->execute();
+
+        return $stmt;
+    }
+
 
     // Create quote
    public function create() {

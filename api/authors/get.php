@@ -10,23 +10,23 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type
   // author read query
   $result = $author->read();
 
-    //Cat array
-    $cat_arr = array();
+    //Author array
+    $aut_arr = array();
 
     while($row = $result->fetch(PDO::FETCH_ASSOC)) {
       extract($row);
 
-      $cat_item = array(
+      $aut_item = array(
         'id' => $id,
         'author' => $author
       );
 
       // Push to "data"
-      array_push($cat_arr, $cat_item);
+      array_push($aut_arr, $aut_item);
     }
 
     //Turn to JSON & output
-    echo json_encode($cat_arr);
+    echo json_encode($aut_arr);
   }
 elseif($_GET['id'] != null){
 // Headers
