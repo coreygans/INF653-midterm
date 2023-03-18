@@ -5,15 +5,11 @@ $json = file_get_contents('php://input');
 // Converts it into a PHP object
 $data = json_decode($json, true);
 
-$name = null;
+//$name = null;
 
-$name = $data['author'];
+$name = $data['author'] ?? null;
 
 if(empty($name)) {
-  header('Access-Control-Allow-Origin: *');
-  header('Content-Type: application/json');
-  header('Access-Control-Allow-Methods: POST');
-  header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization,X-Requested-With');
 
   echo json_encode(
     array('message' => 'Missing Required Parameters')
