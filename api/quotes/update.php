@@ -12,8 +12,8 @@ $category = null;
 
 $id = $data['id'];
 $quotation = $data['quote'];
-$author = $data['author'];
-$category = $data['category'];
+$author = $data['author_id'];
+$category = $data['category_id'];
 
 
 
