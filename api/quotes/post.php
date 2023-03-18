@@ -10,8 +10,8 @@ $author = null;
 $category = null;
 
 $quotation = $data['quote'];
-$author = $data['author'];
-$category = $data['category'];
+$author = $data['author_id'];
+$category = $data['category_id'];
 
 if(empty($quotation) || empty($author) || empty($category)) {
   header('Access-Control-Allow-Origin: *');
