@@ -27,13 +27,18 @@ if (empty($quotation) || empty($author) || empty($category)) {
   $quote->category = $category;
 
   $valid_author = $quote->check_authorid();
+  $valid_cat = $quote->check_catid();
 
-  if ($valid_author) {
+  if ($valid_author && $valid_cat) {
     // Create author
     $quote->create();
-  } else {
+  } elseif (!$valid_author) {
     echo json_encode(
       array('message' => 'author_id Not Found')
+    );
+  } elseif (!$valid_cat) {
+    echo json_encode(
+      array('message' => 'category_id Not Found')
     );
   }
 } else {

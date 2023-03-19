@@ -28,13 +28,19 @@ if (empty($id) || !is_int($id) || empty($quotation) || empty($author) || !is_int
   $quote->category = $category;
 
   $valid_author = $quote->check_authorid();
+  $valid_cat = $quote->check_catid();
 
-  if ($valid_author) {
+  if ($valid_author && $valid_cat) {
     // Update author
     $quote->update();
-  } else {
+  } elseif(!$valid_author) {
     echo json_encode(
       array('message' => 'author_id Not Found')
+    );
+  }
+  elseif(!$valid_cat){
+    echo json_encode(
+      array('message' => 'category_id Not Found')
     );
   }
 

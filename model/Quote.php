@@ -163,6 +163,28 @@ class Quote
     }
   }
 
+  // Check if category exists
+  public function check_catid()
+  {
+    $query = 'SELECT * from categories where id = ?';
+    //Prepare statement
+    $stmt = $this->conn->prepare($query);
+
+    // Bind ID
+    $stmt->bindParam(1, $this->category);
+
+    // Execute query
+    $stmt->execute();
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$row) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+
   // Create quote
   public function create()
   {
