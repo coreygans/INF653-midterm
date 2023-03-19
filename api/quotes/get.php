@@ -1,12 +1,16 @@
 <?php
 
-if($_GET['author_id'] != null){
+$id = $_GET['id'] ?? null;
+$author = $_GET['author_id'] ?? null;
+
+
+if($author != null){
   // Headers
   header('Access-Control-Allow-Origin: *');
   header('Content-Type: application/json');
   header('Access-Control-Allow-Methods: GET');
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization,X-Requested-With');
-  $author = htmlspecialchars($_GET['author_id']);
+  $author = htmlspecialchars($author);
 
     // Get ID
     $quote->author = $author;
@@ -35,13 +39,13 @@ if($_GET['author_id'] != null){
       echo json_encode($quo_arr);
   }
 
-elseif($_GET['id'] != null){
+elseif($id != null){
 // Headers
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: GET');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization,X-Requested-With');
-$id = htmlspecialchars($_GET['id']);
+$id = htmlspecialchars($id);
   // Get ID
   $quote->id = $id;
 
@@ -51,13 +55,7 @@ $id = htmlspecialchars($_GET['id']);
 }
 
 
-elseif(empty($_GET['id'] && !empty($_GET['author_id']))){ 
-
-    header('Access-Control-Allow-Origin: *');
-    header('Content-Type: application/json');
-    header('Access-Control-Allow-Methods: GET');
-    header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization,X-Requested-With');
-    
+elseif(empty($id && !empty($author))){     
       // read query
       $result = $quote->read();
     
