@@ -9,28 +9,24 @@ $data = json_decode($json, true);
 
 $name = $data['author'] ?? null;
 
-if(empty($name)) {
+if (empty($name)) {
 
   echo json_encode(
     array('message' => 'Missing Required Parameters')
   );
-}
-
-elseif(!empty($name)) {
+} elseif (!empty($name)) {
   // Headers
   header('Access-Control-Allow-Origin: *');
   header('Content-Type: application/json');
   header('Access-Control-Allow-Methods: POST');
   header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization,X-Requested-With');
-   
 
-  $author->name = $name;  
 
-    // Create author
+  $author->name = $name;
+
+  // Create author
   $author->create();
- 
-}
-else {
+} else {
   header('Access-Control-Allow-Origin: *');
   header('Content-Type: application/json');
   header('Access-Control-Allow-Methods: POST');
