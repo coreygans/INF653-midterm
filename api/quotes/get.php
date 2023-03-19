@@ -4,7 +4,7 @@ $id = $_GET['id'] ?? null;
 $author = $_GET['author_id'] ?? null;
 $category = $_GET['category_id'] ?? null;
 
-if ($author != null && $category = null) {
+if (!empty($author) && empty($category)) {
   // Headers
   header('Access-Control-Allow-Origin: *');
   header('Content-Type: application/json');
@@ -36,7 +36,7 @@ if ($author != null && $category = null) {
 
   //Turn to JSON & output
   echo json_encode($quo_arr);
-} elseif ($category != null && $author = null) {
+} elseif (!empty($category) && empty($author)) {
   // Headers
   header('Access-Control-Allow-Origin: *');
   header('Content-Type: application/json');
@@ -69,7 +69,7 @@ if ($author != null && $category = null) {
 
   //Turn to JSON & output
   echo json_encode($quo_arr);
-} elseif ($author != null && $category != null) {
+} elseif (!empty($author) && !empty($category)) {
   // Headers
   header('Access-Control-Allow-Origin: *');
   header('Content-Type: application/json');
@@ -99,11 +99,18 @@ if ($author != null && $category = null) {
 
     // Push to "data"
     array_push($quo_arr, $quo_item);
+    //Turn to JSON & output
+  
   }
-
-  //Turn to JSON & output
+  if (empty($quo_arr)){
+    echo json_encode(
+      array('message' => 'No Quotes Found')
+    );
+  }
+  else {
   echo json_encode($quo_arr);
-} elseif ($id != null) {
+  }
+} elseif (!empty($id)) {
   // Headers
   header('Access-Control-Allow-Origin: *');
   header('Content-Type: application/json');
@@ -115,7 +122,7 @@ if ($author != null && $category = null) {
 
   // Get quote
   $quote->read_single();
-} elseif (empty($id && !empty($author))) {
+} elseif (empty($id) && empty($author) && empty($category)) {
   // read query
   $result = $quote->read();
 

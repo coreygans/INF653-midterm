@@ -127,7 +127,7 @@ class Quote
          Inner join authors a ON q.author_id = a.id
          inner join categories c ON q.category_id = c.id
          WHERE q.category_id = ? AND
-         WHERE q.author_id = ?';
+         q.author_id = ?';
 
     //Prepare statement
     $stmt = $this->conn->prepare($query);
