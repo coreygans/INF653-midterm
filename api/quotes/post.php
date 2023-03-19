@@ -34,9 +34,16 @@ if (empty($quotation) || empty($author) || empty($category)) {
   $quote->author = $author;
   $quote->category = $category;
 
+  $valid_author = $quote->check_authorid();
 
-  // Create author
-  $quote->create();
+  if ($valid_author) {
+    // Create author
+    $quote->create();
+  } else {
+    echo json_encode(
+      array('message' => 'author_id Not Found')
+    );
+  }
 } else {
   header('Access-Control-Allow-Origin: *');
   header('Content-Type: application/json');

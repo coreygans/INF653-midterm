@@ -142,6 +142,27 @@ class Quote
     return $stmt;
   }
 
+  // Check if author exists
+  public function check_authorid()
+  {
+    $query = 'SELECT * from authors where id = ?';
+    //Prepare statement
+    $stmt = $this->conn->prepare($query);
+
+    // Bind ID
+    $stmt->bindParam(1, $this->author);
+
+    // Execute query
+    $stmt->execute();
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$row) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   // Create quote
   public function create()
   {
