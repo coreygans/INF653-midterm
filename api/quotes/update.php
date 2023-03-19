@@ -27,8 +27,17 @@ if (empty($id) || !is_int($id) || empty($quotation) || empty($author) || !is_int
   $quote->author = $author;
   $quote->category = $category;
 
-  // Create author
-  $quote->update();
+  $valid_author = $quote->check_authorid();
+
+  if ($valid_author) {
+    // Update author
+    $quote->update();
+  } else {
+    echo json_encode(
+      array('message' => 'author_id Not Found')
+    );
+  }
+
 } else {
   header('Access-Control-Allow-Origin: *');
   header('Content-Type: application/json');
